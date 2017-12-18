@@ -34,7 +34,7 @@ def is_on(player1, player2):
             sum(player1.cards) > 0 and sum(player2.cards) > 0)
 
 
-def judge(player1, choice1, player2, choice2):
+def judge_janken(player1, choice1, player2, choice2):
     n = (choice1 - choice2 + 3) % 3
     if n == 2:    # win
         player1.win()
@@ -98,7 +98,7 @@ def main():
         print(f'{cpu.name}: \"{TABLE[cpuchoice]}\"')
 
         # 勝敗判定
-        print(judge(you, choice, cpu, cpuchoice)[0])
+        print(judge_janken(you, choice, cpu, cpuchoice)[0])
 
         rounds += 1
         print()
