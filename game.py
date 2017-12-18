@@ -54,6 +54,14 @@ def judge_janken(player1, choice1, player2, choice2):
     return ret1, ret2
 
 
+def winner(player1, player2):
+    if player1.star == player2.star:  # draw
+        return None
+    else:    # win, lose
+        winner = player1 if player1.star > player2.star else player2
+        return winner
+
+
 # ゲーム本体
 def main():
 
@@ -107,10 +115,10 @@ def main():
     print('=========')
     print('GAME OVER')
 
-    if you.star == cpu.star:  # draw
+    winner = winner(you, cpu)
+    if not winner:  # draw
         print('DRAW')
     else:    # win, lose
-        winner = you if you.star > cpu.star else cpu
         print('WINNER: {}'.format(winner.name))
 
     results = you.results
