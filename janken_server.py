@@ -50,9 +50,12 @@ def gamethread(accept1, accept2):
         # カード選択
         p1_choice = pickle.loads(p1_conn.recv(1024))
         p2_choice = pickle.loads(p2_conn.recv(1024))
+        p1.cards[p1_choice] -= 1
+        p2.cards[p2_choice] -= 1
 
         # 勝敗判定
-        p1_judge, p2_judge = game.judge_janken(p1, p1_choice, p2, p2_choice)
+        p1, p1_judge, p2, p2_judge = game.judge_janken(
+            p1, p1_choice, p2, p2_choice)
         send_pickle(p1_conn, [p1_judge, p1_choice, p2_choice])
         send_pickle(p2_conn, [p2_judge, p2_choice, p1_choice])
 
@@ -71,7 +74,9 @@ def gamethread(accept1, accept2):
     else:
         game_result = f'WINNER: {winner.name}'
 
+    p1_conn.recv(1024)
     send_pickle(p1_conn, [game_result, p1.results])
+    p2_conn.recv(1024)
     send_pickle(p2_conn, [game_result, p2.results])
 
     p1_conn.close()

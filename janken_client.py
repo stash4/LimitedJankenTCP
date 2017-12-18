@@ -37,6 +37,7 @@ def main():
         rounds, star, cards = pickle.loads(soc.recv(1024))
 
         # indicate status
+        print()
         print(f'--- ROUND {rounds} ---')
         print(f'STAR: {"★ " * star}')
         print()
@@ -64,20 +65,24 @@ def main():
         judge, choice1, choice2 = pickle.loads(soc.recv(1024))
         print(f'{name1}: \"{TABLE[choice1]}\"')
         print(f'{name2}: \"{TABLE[choice2]}\"')
+        print()
         print(judge)
 
         ison = pickle.loads(soc.recv(1024))
         if not ison:
             break
 
+    send_pickle(soc, 'OK')
+    print()
     print('=========')
     print('GAME OVER')
+    print()
 
     game_result, results = pickle.loads(soc.recv(1024))
     print(game_result)
     print('your result')
     print(f'win: {results[0]}, lose: {results[1]}, draw:{results[2]}')
-    s.close()
+    soc.close()
 
 
 if __name__ == '__main__':
