@@ -29,7 +29,6 @@ def gamethread(accept1, accept2):
     send_pickle(p2_conn, TABLE)
 
     name1 = pickle.loads(p1_conn.recv(1024))
-    print(name1)
     name2 = pickle.loads(p2_conn.recv(1024))
     p1, p2 = game.init_game(name1, name2)
 
