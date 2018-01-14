@@ -71,12 +71,17 @@ def gamethread(accept1, accept2):
     if not winner:
         game_result = 'DRAW'
     else:
-        game_result = f'WINNER: {winner.name}'
+        if winner == p1:
+            game_result_p1 = ['WIN', f'WINNER: {winner.name}']
+            game_result_p2 = ['LOSE', f'WINNER: {winner.name}']
+        else:
+            game_result_p1 = ['LOSE', f'WINNER: {winner.name}']
+            game_result_p2 = ['WIN', f'WINNER: {winner.name}']
 
     p1_conn.recv(1024)
-    send_pickle(p1_conn, [game_result, p1.results])
+    send_pickle(p1_conn, [game_result_p1, p1.results])
     p2_conn.recv(1024)
-    send_pickle(p2_conn, [game_result, p2.results])
+    send_pickle(p2_conn, [game_result_p2, p2.results])
 
     p1_conn.close()
     print(f'closed: {p2_addr}')

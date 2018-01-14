@@ -89,7 +89,8 @@ def main():
     print()
 
     game_result, results = pickle.loads(soc.recv(1024))
-    print(result_aa[game_result])
+    print(result_aa[game_result[0]])
+    print(game_result[1])
     print('Your result...')
     print(f'Win: {results[0]}, Lose: {results[1]}, Draw:{results[2]}')
     soc.close()
