@@ -4,6 +4,7 @@ import pickle
 import messages
 
 result_aa = messages.result_aa
+result_aa_s = messages.result_aa_s
 
 
 # dump and send pickle
@@ -75,7 +76,7 @@ def main():
         print(f'{name1}: \"{TABLE[choice1]}\"')
         print(f'{name2}: \"{TABLE[choice2]}\"')
         print()
-        print(judge)
+        print(result_aa_s[judge])
 
         ison = pickle.loads(soc.recv(1024))
         if not ison:
@@ -88,7 +89,7 @@ def main():
     print()
 
     game_result, results = pickle.loads(soc.recv(1024))
-    print(result_aa[game_result])
+    print(result_aa_s[game_result])
     print('Your result...')
     print(f'Win: {results[0]}, Lose: {results[1]}, Draw:{results[2]}')
     soc.close()
