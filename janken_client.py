@@ -21,16 +21,16 @@ def main():
     port = 9999
 
     soc.connect((host, port))
-    print('connected to the server')
+    print('Connected to the server.')
 
     TABLE = pickle.loads(soc.recv(1024))
     print(TABLE)
 
-    name1 = input('input your name -> ')
+    name1 = input('Input your name -> ')
     send_pickle(soc, name1)
 
     name2 = pickle.loads(soc.recv(1024))
-    print(f'start LimitedJanken with {name2}')
+    print(f'Start LimitedJanken with {name2}.')
 
     while True:
         send_pickle(soc, 'OK')
@@ -42,7 +42,7 @@ def main():
         print(f'STAR: {"★ " * star}')
         print()
 
-        print('Please choice.')
+        print('Pick your card.')
         # indicate hands
         for i in range(3):
             print(f'{i + 1}.{TABLE[i]}: {"■ " * cards[i]}')
@@ -80,8 +80,8 @@ def main():
 
     game_result, results = pickle.loads(soc.recv(1024))
     print(game_result)
-    print('your result')
-    print(f'win: {results[0]}, lose: {results[1]}, draw:{results[2]}')
+    print('Your result...')
+    print(f'Win: {results[0]}, Lose: {results[1]}, Draw:{results[2]}')
     soc.close()
 
 
