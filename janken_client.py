@@ -85,11 +85,11 @@ def main():
     send_pickle(soc, 'OK')
     print()
     print('=========')
-    print(result_aa['GAME OVER'])
+    print(result_aa_s['GAME OVER'])
     print()
 
     game_result, results = pickle.loads(soc.recv(1024))
-    print(result_aa_s[game_result])
+    print(result_aa[game_result])
     print('Your result...')
     print(f'Win: {results[0]}, Lose: {results[1]}, Draw:{results[2]}')
     soc.close()
