@@ -47,19 +47,19 @@ def gamethread(accept1, accept2):
         p2_conn.recv(1024)
         send_pickle(p2_conn, [rounds, p2.star, p2.cards])
 
-        # カード選択
+        # select a card
         p1_choice = pickle.loads(p1_conn.recv(1024))
         p2_choice = pickle.loads(p2_conn.recv(1024))
         p1.cards[p1_choice] -= 1
         p2.cards[p2_choice] -= 1
 
-        # 勝敗判定
+        # judge win or lose
         p1, p1_judge, p2, p2_judge = game.judge_janken(
             p1, p1_choice, p2, p2_choice)
         send_pickle(p1_conn, [p1_judge, p1_choice, p2_choice])
         send_pickle(p2_conn, [p2_judge, p2_choice, p1_choice])
 
-        # 続行判定
+        # game over or not
         ison = game.is_on(p1, p2)
         send_pickle(p1_conn, ison)
         send_pickle(p2_conn, ison)
