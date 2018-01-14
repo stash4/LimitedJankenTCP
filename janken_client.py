@@ -18,7 +18,7 @@ result_aa = {
 | | | | |_) |  / _ \ \ /\ / /
 | |_| |  _ <  / ___ \ V  V /
 |____/|_| \_\/_/   \_\_/\_/''',
-    'OVER': '''  ___   _   __  __ ___    _____   _____ ___
+    'GAME OVER': '''  ___   _   __  __ ___    _____   _____ ___
  / __| /_\ |  \/  | __|  / _ \ \ / / __| _ \\
 | (_ |/ _ \| |\/| | _|  | (_) \ V /| _||   /
  \___/_/ \_\_|  |_|___|  \___/ \_/ |___|_|_\\'''
@@ -103,7 +103,7 @@ def main():
     send_pickle(soc, 'OK')
     print()
     print('=========')
-    print('GAME OVER')
+    print(result_aa['GAME OVER'])
     print()
 
     game_result, results = pickle.loads(soc.recv(1024))
