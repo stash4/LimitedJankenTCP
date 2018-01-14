@@ -47,6 +47,12 @@ def main():
 
     TABLE = pickle.loads(soc.recv(1024))
 
+    hands_emoji = {
+        TABLE[0]: '✊',
+        TABLE[1]: '✌️',
+        TABLE[2]: '🖐'
+    }
+
     name1 = input('Input your name -> ')
     send_pickle(soc, name1)
 
@@ -66,7 +72,8 @@ def main():
         print('Pick your card.')
         # indicate hands
         for i in range(3):
-            print(f'{i + 1}.{TABLE[i]}: {"■ " * cards[i]}')
+            hand = TABLE[i]
+            print(f'{i + 1}.{hand}{hands_emoji[hand]} : {"■ " * cards[i]}')
 
         while True:
             # select a card
