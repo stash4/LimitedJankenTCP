@@ -24,7 +24,6 @@ def main():
     print('Connected to the server.')
 
     TABLE = pickle.loads(soc.recv(1024))
-    print(TABLE)
 
     name1 = input('Input your name -> ')
     send_pickle(soc, name1)
