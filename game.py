@@ -34,24 +34,34 @@ def is_on(player1, player2):
             sum(player1.cards) > 0 and sum(player2.cards) > 0)
 
 
-def judge(player1, choice1, player2, choice2):
+def judge_janken(player1, choice1, player2, choice2):
+    p1 = player1
+    p2 = player2
     n = (choice1 - choice2 + 3) % 3
     if n == 2:    # win
-        player1.win()
+        p1.win()
         ret1 = 'WIN'
-        player2.lose()
+        p2.lose()
         ret2 = 'LOSE'
     elif n == 1:  # lose
-        player1.lose()
-        player2.win()
+        p1.lose()
         ret1 = 'LOSE'
+        p2.win()
         ret2 = 'WIN'
     else:         # draw
-        player1.draw()
-        player2.draw()
+        p1.draw()
         ret1 = 'DRAW'
+        p2.draw()
         ret2 = 'DRAW'
-    return ret1, ret2
+    return p1, ret1, p2, ret2
+
+
+def winner(player1, player2):
+    if player1.star == player2.star:  # draw
+        return None
+    else:    # win, lose
+        winner = player1 if player1.star > player2.star else player2
+        return winner
 
 
 # ゲーム本体
@@ -98,7 +108,7 @@ def main():
         print(f'{cpu.name}: \"{TABLE[cpuchoice]}\"')
 
         # 勝敗判定
-        print(judge(you, choice, cpu, cpuchoice)[0])
+        print(judge_janken(you, choice, cpu, cpuchoice)[1])
 
         rounds += 1
         print()
@@ -107,10 +117,10 @@ def main():
     print('=========')
     print('GAME OVER')
 
-    if you.star == cpu.star:  # draw
+    winner = winner(you, cpu)
+    if not winner:  # draw
         print('DRAW')
     else:    # win, lose
-        winner = you if you.star > cpu.star else cpu
         print('WINNER: {}'.format(winner.name))
 
     results = you.results
