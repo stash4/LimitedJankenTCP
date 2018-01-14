@@ -66,7 +66,7 @@ def main():
         # indicate status
         print()
         print(f'--- ROUND {rounds} ---')
-        print(f'STAR: {"★ " * star}')
+        print(f'STAR: {"⭐️ " * star}')
         print()
 
         print('Pick your card.')
