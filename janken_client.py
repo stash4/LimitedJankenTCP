@@ -2,6 +2,28 @@
 import socket
 import pickle
 
+result_aa = {
+    'WIN': '''__        _____ _   _
+\ \      / /_ _| \ | |
+ \ \ /\ / / | ||  \| |
+  \ V  V /  | || |\  |
+   \_/\_/  |___|_| \_|''',
+    'LOSE': ''' _     ___  ____  _____
+| |   / _ \/ ___|| ____|
+| |  | | | \___ \|  _|
+| |__| |_| |___) | |___
+|_____\___/|____/|_____|''',
+    'DRAW': ''' ____  ____      ___        __
+|  _ \|  _ \    / \ \      / /
+| | | | |_) |  / _ \ \ /\ / /
+| |_| |  _ <  / ___ \ V  V /
+|____/|_| \_\/_/   \_\_/\_/''',
+    'OVER': '''  ___   _   __  __ ___    _____   _____ ___
+ / __| /_\ |  \/  | __|  / _ \ \ / / __| _ \\
+| (_ |/ _ \| |\/| | _|  | (_) \ V /| _||   /
+ \___/_/ \_\_|  |_|___|  \___/ \_/ |___|_|_\\'''
+}
+
 
 # dump and send pickle
 def send_pickle(soc, obj):
@@ -78,7 +100,7 @@ def main():
     print()
 
     game_result, results = pickle.loads(soc.recv(1024))
-    print(game_result)
+    print(result_aa[game_result])
     print('Your result...')
     print(f'Win: {results[0]}, Lose: {results[1]}, Draw:{results[2]}')
     soc.close()
